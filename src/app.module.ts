@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryModule } from './cases/categories/category.module';
 import { BrandModule } from './cases/brands/brand.module';
+import { ProductModule } from './cases/products/product.module';
+import { CustomerModule } from './cases/custumers/customer.module';
+import { CityModule } from './cases/cities/modules/city.module';
 
 @Module({
   imports: [
@@ -16,7 +19,10 @@ import { BrandModule } from './cases/brands/brand.module';
       synchronize: true,
     }),
     CategoryModule,
-    BrandModule
+    BrandModule,
+    ProductModule,
+    CityModule,
+    CustomerModule,
   ],
 })
 export class AppModule {}
