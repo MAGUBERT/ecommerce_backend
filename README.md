@@ -1,98 +1,124 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<h1 align="center"> E-commerce Backend </h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 📌 Sobre
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+O E-commerce Backend é um projeto desenvolvido desenvolvido em sala de aula da disciplina de Programação, do Centro Universitário Mater Dei - UNIMATER, que é uma API REST. O objetivo do projeto é fornecer todas as operações necessárias para gerenciar categorias, marcas, produtos, clientes e pedidos de um e-commerce completo.
 
-## Description
+## 🧭 Rotas
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Marcas
+- ```GET /brands```
+- ```GET /brands/:id```
+- ```POST /brands```
+- ```PUT /brands/:id```
+- ```DELETE /brands/:id```
 
-## Project setup
+###  Categorias
+- ```GET /categories```
+- ```GET /categories/:id```
+- ```POST /categories```
+- ```PUT /categories/:id```
+- ```DELETE /categories/:id```
 
-```bash
-$ npm install
+### Cidades
+- ```GET /cities```
+- ```GET /cities/:id```
+- ```POST /cities```
+- ```PUT /cities/:id```
+- ```DELETE /cities/:id```
+
+### Estados
+- ```GET /states```
+- ```GET /states/:id```
+- ```POST /states```
+- ```PUT /states/:id```
+- ```DELETE /states/:id```
+
+### Clientes
+- ```GET /customers```
+- ```GET /customers/:id```
+- ```POST /customers```
+- ```PUT /customers/:id```
+- ```DELETE /customers/:id```
+
+### Pedidos
+- ```GET /orders```
+- ```GET /orders/:id```
+- ```POST /orders```
+- ```PUT /orders/:id```
+- ```DELETE /orders/:id```
+
+### Itens do Pedido
+- ```GET /order-items```
+- ```GET /order-items/:id```
+- ```POST /order-items```
+- ```PUT /order-items/:id```
+- ```DELETE /order-items/:id```
+
+### Produtos
+- ```GET /products```
+- ```GET /products?categoryId=:categoryId```
+- ```GET /products/:id```
+- ```POST /products```
+- ```PUT /products/:id```
+- ```DELETE /products/:id```
+
+### Favoritos
+- ```GET /favorites```
+- ```GET /favorites?customerId=:customerId```
+- ```POST /favorites```
+
+### Reviews
+- ```GET /reviews```
+- ```GET /reviews?productId=:productId```
+- ```POST /reviews```
+
+## 🗄 Banco de Dados
+
+O projeto utiliza **PostgreSQL** hospedado no **Supabase** como banco de dados principal, com **TypeORM** como ORM para mapear entidades, criar relações e realizar operações no banco.
+
+## ⚙️ Variáveis de Ambiente
+
+Para rodar o projeto, é necessário configurar as credenciais do Supabase no arquivo ```.env```:
+```env
+DB_HOST=
+DB_PORT=
+DB_USERNAME=
+DB_PASSWORD=
+DB_DATABASE=
 ```
 
-## Compile and run the project
+## 🔌 Conexão com TypeORM
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+No arquivo ```app.module.ts```, deve-se adicionar a seguinte configuração nos **imports**:
+```typescript
+TypeOrmModule.forRoot({
+  type: 'postgres',
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  autoLoadEntities: true,
+  synchronize: true
+})
 ```
 
-## Run tests
+## 🛠 Tecnologias
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+<div align="center">
+  <table>
+    <tr>
+      <th>NodeJs</th>
+      <th>Nest</th>
+      <th>Supabase</th>
+      <th>TypeScript</th>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=nodejs" alt="Node"></a></td>
+      <td align="center"><a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=nest" alt="Nest"></a></td>
+      <td align="center"><a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=supabase" alt="Supabase"></a></td>
+      <td align="center"><a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=typescript" alt="TypeScript"></a></td>
+    </tr>
+  </table>
+</div>

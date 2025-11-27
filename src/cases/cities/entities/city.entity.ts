@@ -1,18 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { ManyToOne } from "typeorm/browser";
-
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { State } from "./state.entity";
 
 @Entity('city')
 export class City {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ length: 60, nullable: false })
+    @Column({ nullable: false, length: 60 })
     name: string;
 
-    @Column({ length: 7, nullable: false })
+    @Column({ nullable: false, length: 7 })
     ibge: string;
-    
-    @ManyToOne(() => City, {eager: true, nullable:false })
-    city: City;
+
+    @ManyToOne(() => State, { eager: true, nullable: false })
+    state: State;
 }

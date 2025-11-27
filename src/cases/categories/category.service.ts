@@ -4,11 +4,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class CategoryService{
-    constructor(
+export class CategoryService {
+    constructor (
         @InjectRepository(Category)
         private repository: Repository<Category>
     ) {}
+
     findAll(): Promise<Category[]> {
         return this.repository.find();
     }
@@ -22,6 +23,6 @@ export class CategoryService{
     }
 
     async remove(id: string): Promise<void> {
-        await this.repository.delete(id);
+        await this.repository.delete({id: id});
     }
 }

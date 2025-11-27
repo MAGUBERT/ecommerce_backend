@@ -5,12 +5,12 @@ export class State {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ length: 60, nullable: false })
+    @Column({ nullable: false, length: 60 })
     name: string;
 
-    @Column({ length: 2, nullable: false })
+    @Column({ nullable: false, length: 2 })
     ibge: string;
 
-    @Column({ length: 2, nullable: false })
-    acronya: string;
+    @Column({ nullable: false, length: 2 })
+    acronym: string;
 }
